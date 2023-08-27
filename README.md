@@ -10,4 +10,7 @@ conda activate ndd_hack
 ```
 pip install requirements.txt
 ```
-3) запускаем из мейна вводим фразу выводит топ 5
+3) запускаем из main
+```
+python main.py
+```
