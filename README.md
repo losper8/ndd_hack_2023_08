@@ -10,7 +10,7 @@ conda activate ndd_hack
 ```
 pip install requirements.txt
 ```
-3) запускаем из main
+3) запускаем
 ```
 python main.py
 ```
