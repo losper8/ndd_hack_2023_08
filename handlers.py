@@ -16,20 +16,23 @@ async def start_handler(msg: Message):
 @router.message()
 async def message_handler(msg: Message):
     try:
-        df = find_similar_questions(msg.text)
-        df_answer = df['ANSWER'].to_list()
+        df_answer, ans, df = find_similar_questions(msg.text)
+
         df_question = df['QUESTION'].to_list()
+
         kb = [[types.KeyboardButton(text=question)]
               for question in df_question]
         keyboard = types.ReplyKeyboardMarkup(
             keyboard=kb,
             resize_keyboard=True,
             is_persistent=True,
-            input_field_placeholder="Похожие вопросы"
+            input_field_placeholder = "Похожие вопросы"
         )
-        for item in df_answer:
-            await msg.answer(f"{item}", reply_markup=keyboard)
+        if df_answer == 'EMP':
+            await msg.answer(f"{ans}", reply_markup=keyboard)
+        else:
+            await msg.answer(f"{df_answer[0]['summary_text']}", reply_markup=keyboard)
     except:
-        await msg.answer("Ой ой млшики обосрались")
+        await msg.answer("Что-то пошло не так")
 
     kb = []
